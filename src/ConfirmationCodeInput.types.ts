@@ -4,4 +4,5 @@ export interface ConfirmationCodeInputProps {
   onChange?: (value: string) => void
   value?: string
   disabled?: boolean
+  autoFocus?: boolean
 }

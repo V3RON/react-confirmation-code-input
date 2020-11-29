@@ -18,6 +18,9 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
-  rules: {},
+  rules: {
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+  },
   ignorePatterns: ['dist/*'],
 }

@@ -1,7 +1,7 @@
 import React, {
   ChangeEventHandler,
   ClipboardEventHandler,
-  FunctionComponent,
+  forwardRef,
   KeyboardEventHandler,
   useEffect,
   useRef,
@@ -9,10 +9,11 @@ import React, {
 } from 'react'
 import { ConfirmationCodeInputProps } from './ConfirmationCodeInput.types'
 
-export const ConfirmationCodeInput: FunctionComponent<ConfirmationCodeInputProps> = (
-  props
-) => {
-  const { fields = 4, className, onChange, value, disabled } = props
+export const ConfirmationCodeInput = forwardRef<
+  HTMLDivElement,
+  ConfirmationCodeInputProps
+>((props, ref) => {
+  const { fields = 4, className, onChange, value, disabled, autoFocus } = props
 
   const [input, setInput] = useState<string[]>([])
   const inputRefs = useRef<HTMLInputElement[]>([])
@@ -148,9 +149,10 @@ export const ConfirmationCodeInput: FunctionComponent<ConfirmationCodeInputProps
   }
 
   return (
-    <div className={className}>
+    <div ref={ref} className={className}>
       {input.map((char, index) => (
         <input
+          autoFocus={autoFocus && index === 0 ? true : undefined}
           key={index}
           maxLength={fields === index + 1 ? 1 : fields}
           data-index={index}
@@ -167,4 +169,5 @@ export const ConfirmationCodeInput: FunctionComponent<ConfirmationCodeInputProps
       ))}
     </div>
   )
-}
+})
+ConfirmationCodeInput.displayName = 'ConfirmationCodeInput'
