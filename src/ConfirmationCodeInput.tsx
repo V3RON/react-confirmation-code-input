@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import PropTypes from 'prop-types'
 import { ConfirmationCodeInputProps } from './ConfirmationCodeInput.types'
 
 export const ConfirmationCodeInput = forwardRef<
@@ -171,3 +172,14 @@ export const ConfirmationCodeInput = forwardRef<
   )
 })
 ConfirmationCodeInput.displayName = 'ConfirmationCodeInput'
+ConfirmationCodeInput.propTypes = {
+  fields: PropTypes.number,
+  className: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+  disabled: PropTypes.bool,
+  autoFocus: PropTypes.bool,
+}
+ConfirmationCodeInput.defaultProps = {
+  fields: 4,
+}
