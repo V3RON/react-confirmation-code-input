@@ -5,9 +5,10 @@ import { ConfirmationCodeInput } from './ConfirmationCodeInput'
 const VALUE = 'abcdefgh'
 
 describe('ConfirmationCodeInput', () => {
-  it('renders', () => {
-    render(<ConfirmationCodeInput />)
+  it('renders correctly', () => {
+    const { container } = render(<ConfirmationCodeInput />)
     expect(screen.queryAllByRole('textbox')).not.toHaveLength(0)
+    expect(container).toMatchSnapshot()
   })
 
   describe('Props handling', () => {

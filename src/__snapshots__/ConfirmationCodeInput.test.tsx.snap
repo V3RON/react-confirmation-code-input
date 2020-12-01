@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmationCodeInput renders correctly 1`] = `
+<div>
+  <div
+    class="ConfirmationCodeInput "
+  >
+    <input
+      class="ConfirmationCodeInput__input"
+      data-index="0"
+      maxlength="4"
+      type="text"
+      value=""
+    />
+    <input
+      class="ConfirmationCodeInput__input"
+      data-index="1"
+      maxlength="4"
+      type="text"
+      value=""
+    />
+    <input
+      class="ConfirmationCodeInput__input"
+      data-index="2"
+      maxlength="4"
+      type="text"
+      value=""
+    />
+    <input
+      class="ConfirmationCodeInput__input"
+      data-index="3"
+      maxlength="1"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

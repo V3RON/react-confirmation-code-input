@@ -1,28 +1,36 @@
 import babel from '@rollup/plugin-babel'
 import external from 'rollup-plugin-peer-deps-external'
-import typescript from '@rollup/plugin-typescript'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import visualizer from 'rollup-plugin-visualizer'
 import postcss from 'rollup-plugin-postcss'
+import typescript from 'rollup-plugin-typescript2'
+import { terser } from 'rollup-plugin-terser'
 
 import pkg from './package.json'
 
 const plugins = [
-  external(),
-  resolve({
-    browser: true,
+  postcss({
+    plugins: [],
+    minimize: true,
+    sourceMap: 'inline',
+    modules: true,
   }),
-  commonjs(),
-  typescript(),
+  external({
+    includeDependencies: true,
+  }),
+  typescript({
+    typescript: require('typescript'),
+    include: ['src/**/*.ts+(|x)'],
+  }),
   babel({
     babelHelpers: 'runtime',
     exclude: 'node_modules/**',
   }),
-  visualizer(),
-  postcss({
-    modules: true,
+  resolve({
+    browser: true,
   }),
+  commonjs(),
+  terser(),
 ]
 
 export default {
@@ -40,4 +48,8 @@ export default {
     },
   ],
   plugins,
+  external: [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ],
 }

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
     "module": "es2015",
     "jsx": "react",
     "strict": true,
@@ -7,7 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "isolatedModules": true
   },
   "include": ["src/**/*"],
   "exclude": ["src/**/*.stories.tsx", "src/**/*.test.tsx"]
