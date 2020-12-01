@@ -4,6 +4,7 @@ import typescript from '@rollup/plugin-typescript'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import visualizer from 'rollup-plugin-visualizer'
+import postcss from 'rollup-plugin-postcss'
 
 import pkg from './package.json'
 
@@ -19,6 +20,9 @@ const plugins = [
     exclude: 'node_modules/**',
   }),
   visualizer(),
+  postcss({
+    modules: true,
+  }),
 ]
 
 export default {
