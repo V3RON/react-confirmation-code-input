@@ -165,7 +165,7 @@ export const ConfirmationCodeInput = forwardRef<
     const newInput = new Array(fields)
     for (let i = 0; i < fields; i++) {
       if (i >= targetInputIndex) {
-        newInput[i] = newInput[i - targetInputIndex] || ''
+        newInput[i] = clipboardValue[i - targetInputIndex] || ''
       } else {
         newInput[i] = input[i]
       }
@@ -181,9 +181,9 @@ export const ConfirmationCodeInput = forwardRef<
       onChange(newInput.join(''))
     }
 
-    inputRefs.current[
-      Math.min(targetInputIndex + clipboardValue.length, length) - 1
-    ].focus()
+    const focusedInputIndex =
+      Math.min(targetInputIndex + clipboardValue.length, fields) - 1
+    inputRefs.current[focusedInputIndex].focus()
   }
 
   return (
