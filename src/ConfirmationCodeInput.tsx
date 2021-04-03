@@ -28,6 +28,15 @@ export const ConfirmationCodeInput = forwardRef<
 
   const [input, setInput] = useState<string[]>([])
   const inputRefs = useRef<HTMLInputElement[]>([])
+  const regexCache = useRef<RegExp | null>(null)
+
+  useEffect(() => {
+    if (!regex) {
+      return
+    }
+
+    regexCache.current = new RegExp(regex)
+  }, [regex])
 
   useEffect(() => {
     if (value == null) {
@@ -71,7 +80,7 @@ export const ConfirmationCodeInput = forwardRef<
       return true
     }
 
-    return new RegExp(regex).test(value.toString())
+    return regexCache.current!.test(value.join(''))
   }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {

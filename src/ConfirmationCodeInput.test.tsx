@@ -114,13 +114,20 @@ describe('ConfirmationCodeInput', () => {
         />
       )
       const inputs = screen.queryAllByRole('textbox') as HTMLInputElement[]
-      inputs[0].focus()
-      fireEvent.keyDown(inputs[0], { key: 'A' })
 
+      inputs[0].focus()
+      fireEvent.change(inputs[0], { target: { value: 'A' } })
       expect(
         (document.activeElement as HTMLInputElement | null)?.dataset.index
       ).toEqual(inputs[0].dataset.index)
       expect(onChangeSpy).not.toHaveBeenCalled()
+
+      inputs[0].focus()
+      fireEvent.change(inputs[0], { target: { value: '1' } })
+      expect(
+        (document.activeElement as HTMLInputElement | null)?.dataset.index
+      ).toEqual(inputs[1].dataset.index)
+      expect(onChangeSpy).toHaveBeenCalled()
     })
   })
 })
