@@ -129,5 +129,67 @@ describe('ConfirmationCodeInput', () => {
       ).toEqual(inputs[1].dataset.index)
       expect(onChangeSpy).toHaveBeenCalled()
     })
+
+    it('should disallow pasting of forbidden content', () => {
+      const onChangeSpy = jest.fn()
+      render(
+        <ConfirmationCodeInput
+          fields={4}
+          regex="^[0-9]*$"
+          onChange={onChangeSpy}
+        />
+      )
+      const inputs = screen.queryAllByRole('textbox') as HTMLInputElement[]
+
+      fireEvent.paste(inputs[1], {
+        clipboardData: { getData: () => 'zas' },
+      })
+
+      expect(onChangeSpy).toHaveBeenCalledTimes(0)
+    })
+  })
+
+  it('handles pasting', () => {
+    const onChangeSpy = jest.fn()
+    render(<ConfirmationCodeInput fields={4} onChange={onChangeSpy} />)
+    const inputs = screen.queryAllByRole('textbox') as HTMLInputElement[]
+
+    fireEvent.paste(inputs[0], {
+      clipboardData: { getData: () => '432' },
+    })
+
+    expect(
+      (document.activeElement as HTMLInputElement | null)?.dataset.index
+    ).toEqual(inputs[2].dataset.index)
+    expect(onChangeSpy).toHaveBeenCalledTimes(1)
+  })
+
+  it("should warn in development mode about 'value' being too long", () => {
+    const startingEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = 'development'
+    const spy = jest.spyOn(global.console, 'error')
+    const { rerender } = render(
+      <ConfirmationCodeInput fields={4} value="ABCDEFGH" />
+    )
+
+    expect(spy).toHaveBeenCalled()
+
+    process.env.NODE_ENV = 'production'
+    rerender(<ConfirmationCodeInput fields={4} value="ABCDEFGH" />)
+
+    process.env.NODE_ENV = startingEnv
+  })
+
+  it('should cut provided value to the number of fields', () => {
+    const { rerender } = render(
+      <ConfirmationCodeInput fields={4} value="ABCD" />
+    )
+
+    rerender(<ConfirmationCodeInput fields={2} value="ABCD" />)
+
+    const inputs = screen.queryAllByRole('textbox') as HTMLInputElement[]
+    expect(inputs[0]).toHaveValue('A')
+    expect(inputs[1]).toHaveValue('B')
+    expect(inputs).toHaveLength(2)
   })
 })
