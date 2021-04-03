@@ -1,6 +1,6 @@
 {
   "name": "react-confirmation-code-input",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Confirmation code component for React",
   "scripts": {
     "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist/types",
