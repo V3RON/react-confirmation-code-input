@@ -14,6 +14,9 @@
   <a href="https://www.npmjs.com/package/react-confirmation-code-input">
     <img src="https://img.shields.io/npm/v/react-confirmation-code-input.svg" alt="NPM package version." />
   </a>
+  <a href="https://codecov.io/gh/V3RON/react-confirmation-code-input">
+    <img src="https://codecov.io/gh/V3RON/react-confirmation-code-input/branch/master/graph/badge.svg?token=2ED9YLSKUD" />
+  </a>
 </p>
 
 # 📦 How to use?
