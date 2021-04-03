@@ -31,3 +31,7 @@ export const ReactHookForm = (props) => {
     </form>
   )
 }
+
+export const WithRegex = (props) => (
+  <ConfirmationCodeInput {...props} regex="[0-9]+" />
+)

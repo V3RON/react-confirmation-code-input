@@ -5,4 +5,5 @@ export interface ConfirmationCodeInputProps {
   value?: string
   disabled?: boolean
   autoFocus?: boolean
+  regex?: string
 }

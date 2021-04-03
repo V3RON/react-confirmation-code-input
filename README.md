@@ -40,6 +40,7 @@ import { ConfirmationCodeInput } from 'react-confirmation-code-input';
 | onChange               | func   | Called when user changes value of the input.                |
 | className              | string | Sets CSS class of root element.                             |
 | disabled               | bool   | Makes all children disabled.                                |
+| regex                  | string | Makes sure all chars typed are creating matching string     |
 
 # 📝 License
 
