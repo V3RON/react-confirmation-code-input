@@ -10,7 +10,7 @@ import React, {
 import PropTypes from 'prop-types'
 import { ConfirmationCodeInputProps } from './ConfirmationCodeInput.types'
 
-import './ConfirmationCodeInput.css'
+import classes from './ConfirmationCodeInput.module.css'
 
 export const ConfirmationCodeInput = forwardRef<
   HTMLDivElement,
@@ -187,10 +187,13 @@ export const ConfirmationCodeInput = forwardRef<
   }
 
   return (
-    <div ref={ref} className={`ConfirmationCodeInput ${className ?? ''}`}>
+    <div
+      ref={ref}
+      className={`${classes.ConfirmationCodeInput} ${className ?? ''}`}
+    >
       {input.map((char, index) => (
         <input
-          className="ConfirmationCodeInput__input"
+          className={classes.ConfirmationCodeInput__input}
           autoFocus={autoFocus && index === 0 ? true : undefined}
           key={index}
           maxLength={fields === index + 1 ? 1 : fields}
